@@ -1,0 +1,51 @@
+{
+  "name": "dpatron",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev:turbo": "next dev --turbo",
+    "dev:turbo2": "concurrently 'next dev --turbo' 'yarn tailwind --watch'",
+    "dev": "next dev",
+    "start": "next dev",
+    "build": "next build",
+    "serve": "next start",
+    "lint": "next lint",
+    "format": "rome format ./src --write",
+    "format:prettier": "prettier --write '.src/**/*.{js,ts,tsx,md}'"
+  },
+  "devDependencies": {
+    "@graphql-codegen/add": "^3.2.1",
+    "@graphql-codegen/cli": "^2.13.12",
+    "@graphql-codegen/client-preset": "^1.1.4",
+    "@graphql-codegen/import-types-preset": "^2.2.6",
+    "@graphql-codegen/typed-document-node": "^2.3.7",
+    "@graphql-codegen/typescript": "^2.8.2",
+    "@graphql-codegen/typescript-graphql-request": "^4.5.8",
+    "@graphql-codegen/typescript-operations": "^2.5.7",
+    "@graphql-codegen/typescript-react-query": "^4.0.5",
+    "@graphql-eslint/eslint-plugin": "^3.13.1",
+    "@types/node": "^18.11.9",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.9",
+    "eslint": "^8.28.0",
+    "eslint-config-next": "^13.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-tailwind": "^0.2.1",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "graphql-codegen-typescript-validation-schema": "^0.6.2",
+    "next-superjson-plugin": "^0.4.9",
+    "prettier": "^2.7.1",
+    "rome": "^10.0.1",
+    "ts-node": "^10.9.1",
+    "ts-toolbelt": "^9.6.0",
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "graphql": "^16.6.0"
+  }
+}
