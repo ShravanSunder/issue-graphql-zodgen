@@ -75,7 +75,7 @@ const importPlugins = [
 
 const config: CodegenConfig = {
   schema: 'https://api-sandbox-mumbai.lens.dev/',
-  documents: ['src/shared/services/requests/**/*.{graphql,gql}'],
+  documents: ['src/graphql/**/*.{graphql,gql}'],
   config: pluginConfig,
   ignoreNoDocuments: true, // for better experience with the watcher
   hooks: {

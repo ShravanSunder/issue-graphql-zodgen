@@ -557,8 +557,8 @@ export function CollectConditionInputSchema(): z.ZodObject<
   Properties<CollectConditionInput>
 > {
   return z.object({
-    publicationId: string,
-    publisherId: string,
+    publicationId: string.nullish(),
+    thisPublication: z.boolean().nullish(),
   });
 }
 
@@ -567,8 +567,8 @@ export function CollectConditionOutputSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CollectConditionOutput").optional(),
-    publicationId: string,
-    publisherId: string,
+    publicationId: string.nullish(),
+    thisPublication: z.boolean().nullish(),
   });
 }
 
@@ -1496,7 +1496,6 @@ export function EoaOwnershipInputSchema(): z.ZodObject<
 > {
   return z.object({
     address: string,
-    chainID: number,
   });
 }
 
@@ -1506,7 +1505,6 @@ export function EoaOwnershipOutputSchema(): z.ZodObject<
   return z.object({
     __typename: z.literal("EoaOwnershipOutput").optional(),
     address: string,
-    chainID: number,
   });
 }
 
