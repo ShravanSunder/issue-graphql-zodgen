@@ -377,7 +377,7 @@ export function AccessConditionOutputSchema(): z.ZodObject<
 
 export function AchRequestSchema(): z.ZodObject<Properties<AchRequest>> {
   return z.object({
-    ethereumAddress: string,
+    ethereumAddress: z.string(),
     freeTextHandle: z.boolean().nullish(),
     handle: definedNonNullAnySchema.nullish(),
     overrideAlreadyClaimed: z.boolean(),
@@ -391,7 +391,7 @@ export function AddProfileInterestsRequestSchema(): z.ZodObject<
 > {
   return z.object({
     interests: z.array(definedNonNullAnySchema),
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -400,9 +400,9 @@ export function AllPublicationsTagsRequestSchema(): z.ZodObject<
 > {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
     sort: definedNonNullAnySchema,
-    source: string.nullish(),
+    source: z.string().nullish(),
   });
 }
 
@@ -429,8 +429,8 @@ export function ApprovedAllowanceAmountSchema(): z.ZodObject<
   return z.object({
     __typename: z.literal("ApprovedAllowanceAmount").optional(),
     allowance: z.string(),
-    contractAddress: string,
-    currency: string,
+    contractAddress: z.string(),
+    currency: z.string(),
     module: z.string(),
   });
 }
@@ -440,12 +440,12 @@ export function ApprovedModuleAllowanceAmountRequestSchema(): z.ZodObject<
 > {
   return z.object({
     collectModules: z.array(definedNonNullAnySchema).nullish(),
-    currencies: z.array(string),
+    currencies: z.array(z.string()),
     followModules: z.array(definedNonNullAnySchema).nullish(),
     referenceModules: z.array(definedNonNullAnySchema).nullish(),
-    unknownCollectModules: z.array(string).nullish(),
-    unknownFollowModules: z.array(string).nullish(),
-    unknownReferenceModules: z.array(string).nullish(),
+    unknownCollectModules: z.array(z.string()).nullish(),
+    unknownFollowModules: z.array(z.string()).nullish(),
+    unknownReferenceModules: z.array(z.string()).nullish(),
   });
 }
 
@@ -473,8 +473,8 @@ export function AuthenticationResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("AuthenticationResult").optional(),
-    accessToken: string,
-    refreshToken: string,
+    accessToken: z.string(),
+    refreshToken: z.string(),
   });
 }
 
@@ -482,8 +482,8 @@ export function BroadcastRequestSchema(): z.ZodObject<
   Properties<BroadcastRequest>
 > {
   return z.object({
-    id: string,
-    signature: string,
+    id: z.string(),
+    signature: z.string(),
   });
 }
 
@@ -491,7 +491,7 @@ export function BurnProfileRequestSchema(): z.ZodObject<
   Properties<BurnProfileRequest>
 > {
   return z.object({
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -527,7 +527,7 @@ export function ChallengeRequestSchema(): z.ZodObject<
   Properties<ChallengeRequest>
 > {
   return z.object({
-    address: string,
+    address: z.string(),
   });
 }
 
@@ -557,7 +557,7 @@ export function CollectConditionInputSchema(): z.ZodObject<
   Properties<CollectConditionInput>
 > {
   return z.object({
-    publicationId: string.nullish(),
+    publicationId: z.string().nullish(),
     thisPublication: z.boolean().nullish(),
   });
 }
@@ -567,7 +567,7 @@ export function CollectConditionOutputSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CollectConditionOutput").optional(),
-    publicationId: string.nullish(),
+    publicationId: z.string().nullish(),
     thisPublication: z.boolean().nullish(),
   });
 }
@@ -602,30 +602,30 @@ export function CollectedEventSchema(): z.ZodObject<
   return z.object({
     __typename: z.literal("CollectedEvent").optional(),
     profile: definedNonNullAnySchema,
-    timestamp: Date,
+    timestamp: definedNonNullAnySchema,
   });
 }
 
 export function CommentSchema(): z.ZodObject<Properties<Comment>> {
   return z.object({
     __typename: z.literal("Comment").optional(),
-    appId: string.nullish(),
+    appId: z.string().nullish(),
     canComment: definedNonNullAnySchema,
     canDecrypt: definedNonNullAnySchema,
     canMirror: definedNonNullAnySchema,
     collectModule: definedNonNullAnySchema,
-    collectNftAddress: string.nullish(),
+    collectNftAddress: z.string().nullish(),
     collectedBy: definedNonNullAnySchema.nullish(),
     commentOn: definedNonNullAnySchema.nullish(),
-    createdAt: Date,
+    createdAt: definedNonNullAnySchema,
     firstComment: definedNonNullAnySchema.nullish(),
     hasCollectedByMe: z.boolean(),
     hidden: z.boolean(),
-    id: string,
+    id: z.string(),
     isGated: z.boolean(),
     mainPost: definedNonNullAnySchema,
     metadata: definedNonNullAnySchema,
-    mirrors: z.array(string),
+    mirrors: z.array(z.string()),
     onChainContentURI: z.string(),
     profile: definedNonNullAnySchema,
     reaction: definedNonNullAnySchema.nullish(),
@@ -661,8 +661,8 @@ export function CreateBurnEip712TypedDataValueSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateBurnEIP712TypedDataValue").optional(),
-    deadline: number,
-    nonce: number,
+    deadline: z.number(),
+    nonce: z.number(),
     tokenId: z.string(),
   });
 }
@@ -672,8 +672,8 @@ export function CreateBurnProfileBroadcastItemResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateBurnProfileBroadcastItemResult").optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -683,8 +683,8 @@ export function CreateCollectBroadcastItemResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateCollectBroadcastItemResult").optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -714,11 +714,11 @@ export function CreateCollectEip712TypedDataValueSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateCollectEIP712TypedDataValue").optional(),
-    data: ethers.Bytes,
-    deadline: number,
-    nonce: number,
-    profileId: string,
-    pubId: string,
+    data: definedNonNullAnySchema,
+    deadline: z.number(),
+    nonce: z.number(),
+    profileId: z.string(),
+    pubId: z.string(),
   });
 }
 
@@ -726,8 +726,8 @@ export function CreateCollectRequestSchema(): z.ZodObject<
   Properties<CreateCollectRequest>
 > {
   return z.object({
-    publicationId: string,
-    unknownModuleData: ethers.Bytes.nullish(),
+    publicationId: z.string(),
+    unknownModuleData: definedNonNullAnySchema.nullish(),
   });
 }
 
@@ -736,8 +736,8 @@ export function CreateCommentBroadcastItemResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateCommentBroadcastItemResult").optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -767,17 +767,17 @@ export function CreateCommentEip712TypedDataValueSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateCommentEIP712TypedDataValue").optional(),
-    collectModule: string,
-    collectModuleInitData: ethers.Bytes,
-    contentURI: string,
-    deadline: number,
-    nonce: number,
-    profileId: string,
-    profileIdPointed: string,
-    pubIdPointed: string,
-    referenceModule: string,
-    referenceModuleData: ethers.Bytes,
-    referenceModuleInitData: ethers.Bytes,
+    collectModule: z.string(),
+    collectModuleInitData: definedNonNullAnySchema,
+    contentURI: z.string(),
+    deadline: z.number(),
+    nonce: z.number(),
+    profileId: z.string(),
+    profileIdPointed: z.string(),
+    pubIdPointed: z.string(),
+    referenceModule: z.string(),
+    referenceModuleData: definedNonNullAnySchema,
+    referenceModuleInitData: definedNonNullAnySchema,
   });
 }
 
@@ -786,8 +786,8 @@ export function CreateFollowBroadcastItemResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateFollowBroadcastItemResult").optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -817,10 +817,10 @@ export function CreateFollowEip712TypedDataValueSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateFollowEIP712TypedDataValue").optional(),
-    datas: z.array(ethers.Bytes),
-    deadline: number,
-    nonce: number,
-    profileIds: z.array(string),
+    datas: z.array(definedNonNullAnySchema),
+    deadline: z.number(),
+    nonce: z.number(),
+    profileIds: z.array(z.string()),
   });
 }
 
@@ -829,8 +829,8 @@ export function CreateMirrorBroadcastItemResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateMirrorBroadcastItemResult").optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -860,14 +860,14 @@ export function CreateMirrorEip712TypedDataValueSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateMirrorEIP712TypedDataValue").optional(),
-    deadline: number,
-    nonce: number,
-    profileId: string,
-    profileIdPointed: string,
-    pubIdPointed: string,
-    referenceModule: string,
-    referenceModuleData: ethers.Bytes,
-    referenceModuleInitData: ethers.Bytes,
+    deadline: z.number(),
+    nonce: z.number(),
+    profileId: z.string(),
+    profileIdPointed: z.string(),
+    pubIdPointed: z.string(),
+    referenceModule: z.string(),
+    referenceModuleData: definedNonNullAnySchema,
+    referenceModuleInitData: definedNonNullAnySchema,
   });
 }
 
@@ -875,8 +875,8 @@ export function CreateMirrorRequestSchema(): z.ZodObject<
   Properties<CreateMirrorRequest>
 > {
   return z.object({
-    profileId: string,
-    publicationId: string,
+    profileId: z.string(),
+    publicationId: z.string(),
     referenceModule: definedNonNullAnySchema.nullish(),
   });
 }
@@ -886,8 +886,8 @@ export function CreatePostBroadcastItemResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreatePostBroadcastItemResult").optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -917,14 +917,14 @@ export function CreatePostEip712TypedDataValueSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreatePostEIP712TypedDataValue").optional(),
-    collectModule: string,
-    collectModuleInitData: ethers.Bytes,
-    contentURI: string,
-    deadline: number,
-    nonce: number,
-    profileId: string,
-    referenceModule: string,
-    referenceModuleInitData: ethers.Bytes,
+    collectModule: z.string(),
+    collectModuleInitData: definedNonNullAnySchema,
+    contentURI: z.string(),
+    deadline: z.number(),
+    nonce: z.number(),
+    profileId: z.string(),
+    referenceModule: z.string(),
+    referenceModuleInitData: definedNonNullAnySchema,
   });
 }
 
@@ -933,9 +933,9 @@ export function CreateProfileRequestSchema(): z.ZodObject<
 > {
   return z.object({
     followModule: definedNonNullAnySchema.nullish(),
-    followNFTURI: string.nullish(),
+    followNFTURI: z.string().nullish(),
     handle: definedNonNullAnySchema,
-    profilePictureUri: string.nullish(),
+    profilePictureUri: z.string().nullish(),
   });
 }
 
@@ -944,10 +944,10 @@ export function CreatePublicCommentRequestSchema(): z.ZodObject<
 > {
   return z.object({
     collectModule: definedNonNullAnySchema,
-    contentURI: string,
+    contentURI: z.string(),
     gated: z.lazy(() => definedNonNullAnySchema.nullish()),
-    profileId: string,
-    publicationId: string,
+    profileId: z.string(),
+    publicationId: z.string(),
     referenceModule: definedNonNullAnySchema.nullish(),
   });
 }
@@ -957,9 +957,9 @@ export function CreatePublicPostRequestSchema(): z.ZodObject<
 > {
   return z.object({
     collectModule: definedNonNullAnySchema,
-    contentURI: string,
+    contentURI: z.string(),
     gated: z.lazy(() => definedNonNullAnySchema.nullish()),
-    profileId: string,
+    profileId: z.string(),
     referenceModule: definedNonNullAnySchema.nullish(),
   });
 }
@@ -968,8 +968,8 @@ export function CreatePublicSetProfileMetadataUriRequestSchema(): z.ZodObject<
   Properties<CreatePublicSetProfileMetadataUriRequest>
 > {
   return z.object({
-    metadata: string,
-    profileId: string,
+    metadata: z.string(),
+    profileId: z.string(),
   });
 }
 
@@ -977,7 +977,7 @@ export function CreateSetDefaultProfileRequestSchema(): z.ZodObject<
   Properties<CreateSetDefaultProfileRequest>
 > {
   return z.object({
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -986,8 +986,8 @@ export function CreateSetDispatcherBroadcastItemResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateSetDispatcherBroadcastItemResult").optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -1017,10 +1017,10 @@ export function CreateSetDispatcherEip712TypedDataValueSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateSetDispatcherEIP712TypedDataValue").optional(),
-    deadline: number,
-    dispatcher: string,
-    nonce: number,
-    profileId: string,
+    deadline: z.number(),
+    dispatcher: z.string(),
+    nonce: z.number(),
+    profileId: z.string(),
   });
 }
 
@@ -1031,8 +1031,8 @@ export function CreateSetFollowModuleBroadcastItemResultSchema(): z.ZodObject<
     __typename: z
       .literal("CreateSetFollowModuleBroadcastItemResult")
       .optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -1066,11 +1066,11 @@ export function CreateSetFollowModuleEip712TypedDataValueSchema(): z.ZodObject<
     __typename: z
       .literal("CreateSetFollowModuleEIP712TypedDataValue")
       .optional(),
-    deadline: number,
-    followModule: string,
-    followModuleInitData: ethers.Bytes,
-    nonce: number,
-    profileId: string,
+    deadline: z.number(),
+    followModule: z.string(),
+    followModuleInitData: definedNonNullAnySchema,
+    nonce: z.number(),
+    profileId: z.string(),
   });
 }
 
@@ -1079,7 +1079,7 @@ export function CreateSetFollowModuleRequestSchema(): z.ZodObject<
 > {
   return z.object({
     followModule: definedNonNullAnySchema,
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -1090,8 +1090,8 @@ export function CreateSetFollowNftUriBroadcastItemResultSchema(): z.ZodObject<
     __typename: z
       .literal("CreateSetFollowNFTUriBroadcastItemResult")
       .optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -1125,10 +1125,10 @@ export function CreateSetFollowNftUriEip712TypedDataValueSchema(): z.ZodObject<
     __typename: z
       .literal("CreateSetFollowNFTUriEIP712TypedDataValue")
       .optional(),
-    deadline: number,
-    followNFTURI: string,
-    nonce: number,
-    profileId: string,
+    deadline: z.number(),
+    followNFTURI: z.string(),
+    nonce: z.number(),
+    profileId: z.string(),
   });
 }
 
@@ -1136,8 +1136,8 @@ export function CreateSetFollowNftUriRequestSchema(): z.ZodObject<
   Properties<CreateSetFollowNftUriRequest>
 > {
   return z.object({
-    followNFTURI: string.nullish(),
-    profileId: string,
+    followNFTURI: z.string().nullish(),
+    profileId: z.string(),
   });
 }
 
@@ -1148,8 +1148,8 @@ export function CreateSetProfileImageUriBroadcastItemResultSchema(): z.ZodObject
     __typename: z
       .literal("CreateSetProfileImageUriBroadcastItemResult")
       .optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -1183,10 +1183,10 @@ export function CreateSetProfileImageUriEip712TypedDataValueSchema(): z.ZodObjec
     __typename: z
       .literal("CreateSetProfileImageUriEIP712TypedDataValue")
       .optional(),
-    deadline: number,
-    imageURI: string,
-    nonce: number,
-    profileId: string,
+    deadline: z.number(),
+    imageURI: z.string(),
+    nonce: z.number(),
+    profileId: z.string(),
   });
 }
 
@@ -1197,8 +1197,8 @@ export function CreateSetProfileMetadataUriBroadcastItemResultSchema(): z.ZodObj
     __typename: z
       .literal("CreateSetProfileMetadataURIBroadcastItemResult")
       .optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -1234,10 +1234,10 @@ export function CreateSetProfileMetadataUrieip712TypedDataValueSchema(): z.ZodOb
     __typename: z
       .literal("CreateSetProfileMetadataURIEIP712TypedDataValue")
       .optional(),
-    deadline: number,
-    metadata: string,
-    nonce: number,
-    profileId: string,
+    deadline: z.number(),
+    metadata: z.string(),
+    nonce: z.number(),
+    profileId: z.string(),
   });
 }
 
@@ -1246,8 +1246,8 @@ export function CreateToggleFollowBroadcastItemResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateToggleFollowBroadcastItemResult").optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -1277,10 +1277,10 @@ export function CreateToggleFollowEip712TypedDataValueSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateToggleFollowEIP712TypedDataValue").optional(),
-    deadline: number,
+    deadline: z.number(),
     enables: z.array(z.boolean()),
-    nonce: number,
-    profileIds: z.array(string),
+    nonce: z.number(),
+    profileIds: z.array(z.string()),
   });
 }
 
@@ -1289,7 +1289,7 @@ export function CreateToggleFollowRequestSchema(): z.ZodObject<
 > {
   return z.object({
     enables: z.array(z.boolean()),
-    profileIds: z.array(string),
+    profileIds: z.array(z.string()),
   });
 }
 
@@ -1298,8 +1298,8 @@ export function CreateUnfollowBroadcastItemResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("CreateUnfollowBroadcastItemResult").optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -1312,7 +1312,7 @@ export function DefaultProfileRequestSchema(): z.ZodObject<
   Properties<DefaultProfileRequest>
 > {
   return z.object({
-    ethereumAddress: string,
+    ethereumAddress: z.string(),
   });
 }
 
@@ -1334,7 +1334,7 @@ export function DegreesOfSeparationReferenceModuleSettingsSchema(): z.ZodObject<
       .literal("DegreesOfSeparationReferenceModuleSettings")
       .optional(),
     commentsRestricted: z.boolean(),
-    contractAddress: string,
+    contractAddress: z.string(),
     degreesOfSeparation: z.number(),
     mirrorsRestricted: z.boolean(),
     type: definedNonNullAnySchema,
@@ -1344,15 +1344,15 @@ export function DegreesOfSeparationReferenceModuleSettingsSchema(): z.ZodObject<
 export function DispatcherSchema(): z.ZodObject<Properties<Dispatcher>> {
   return z.object({
     __typename: z.literal("Dispatcher").optional(),
-    address: string,
+    address: z.string(),
     canUseRelay: z.boolean(),
   });
 }
 
 export function DoesFollowSchema(): z.ZodObject<Properties<DoesFollow>> {
   return z.object({
-    followerAddress: string,
-    profileId: string,
+    followerAddress: z.string(),
+    profileId: z.string(),
   });
 }
 
@@ -1369,10 +1369,10 @@ export function DoesFollowResponseSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("DoesFollowResponse").optional(),
-    followerAddress: string,
+    followerAddress: z.string(),
     follows: z.boolean(),
     isFinalisedOnChain: z.boolean(),
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -1381,9 +1381,9 @@ export function Eip712TypedDataDomainSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("EIP712TypedDataDomain").optional(),
-    chainId: number,
+    chainId: z.number(),
     name: z.string(),
-    verifyingContract: string,
+    verifyingContract: z.string(),
     version: z.string(),
   });
 }
@@ -1401,16 +1401,16 @@ export function Eip712TypedDataFieldSchema(): z.ZodObject<
 export function ElectedMirrorSchema(): z.ZodObject<Properties<ElectedMirror>> {
   return z.object({
     __typename: z.literal("ElectedMirror").optional(),
-    mirrorId: string,
+    mirrorId: z.string(),
     profile: definedNonNullAnySchema,
-    timestamp: Date,
+    timestamp: definedNonNullAnySchema,
   });
 }
 
 export function EnabledModuleSchema(): z.ZodObject<Properties<EnabledModule>> {
   return z.object({
     __typename: z.literal("EnabledModule").optional(),
-    contractAddress: string,
+    contractAddress: z.string(),
     inputParams: z.array(definedNonNullAnySchema),
     moduleName: z.string(),
     redeemParams: z.array(definedNonNullAnySchema),
@@ -1450,9 +1450,9 @@ export function EncryptedMediaSchema(): z.ZodObject<
     altTag: definedNonNullAnySchema.nullish(),
     cover: definedNonNullAnySchema.nullish(),
     height: z.number().nullish(),
-    mimeType: string.nullish(),
+    mimeType: z.string().nullish(),
     size: z.number().nullish(),
-    url: string,
+    url: z.string(),
     width: z.number().nullish(),
   });
 }
@@ -1487,7 +1487,7 @@ export function EnsOnChainIdentitySchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("EnsOnChainIdentity").optional(),
-    name: string.nullish(),
+    name: z.string().nullish(),
   });
 }
 
@@ -1495,7 +1495,7 @@ export function EoaOwnershipInputSchema(): z.ZodObject<
   Properties<EoaOwnershipInput>
 > {
   return z.object({
-    address: string,
+    address: z.string(),
   });
 }
 
@@ -1504,14 +1504,14 @@ export function EoaOwnershipOutputSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("EoaOwnershipOutput").optional(),
-    address: string,
+    address: z.string(),
   });
 }
 
 export function Erc20Schema(): z.ZodObject<Properties<Erc20>> {
   return z.object({
     __typename: z.literal("Erc20").optional(),
-    address: string,
+    address: z.string(),
     decimals: z.number(),
     name: z.string(),
     symbol: z.string(),
@@ -1531,9 +1531,9 @@ export function Erc20OwnershipInputSchema(): z.ZodObject<
 > {
   return z.object({
     amount: z.string(),
-    chainID: number,
+    chainID: z.number(),
     condition: definedNonNullAnySchema,
-    contractAddress: string,
+    contractAddress: z.string(),
     decimals: z.number(),
   });
 }
@@ -1544,9 +1544,9 @@ export function Erc20OwnershipOutputSchema(): z.ZodObject<
   return z.object({
     __typename: z.literal("Erc20OwnershipOutput").optional(),
     amount: z.string(),
-    chainID: number,
+    chainID: z.number(),
     condition: definedNonNullAnySchema,
-    contractAddress: string,
+    contractAddress: z.string(),
     decimals: z.number(),
   });
 }
@@ -1567,9 +1567,9 @@ export function ExploreProfilesRequestSchema(): z.ZodObject<
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
     customFilters: z.array(definedNonNullAnySchema).nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
     sortCriteria: definedNonNullAnySchema,
-    timestamp: number.nullish(),
+    timestamp: z.number().nullish(),
   });
 }
 
@@ -1579,14 +1579,14 @@ export function ExplorePublicationRequestSchema(): z.ZodObject<
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
     customFilters: z.array(definedNonNullAnySchema).nullish(),
-    excludeProfileIds: z.array(string).nullish(),
-    limit: number.nullish(),
+    excludeProfileIds: z.array(z.string()).nullish(),
+    limit: z.number().nullish(),
     metadata: definedNonNullAnySchema.nullish(),
     noRandomize: z.boolean().nullish(),
     publicationTypes: z.array(definedNonNullAnySchema).nullish(),
     sortCriteria: definedNonNullAnySchema,
-    sources: z.array(string).nullish(),
-    timestamp: number.nullish(),
+    sources: z.array(z.string()).nullish(),
+    timestamp: z.number().nullish(),
   });
 }
 
@@ -1606,7 +1606,7 @@ export function FeeCollectModuleParamsSchema(): z.ZodObject<
   return z.object({
     amount: definedNonNullAnySchema,
     followerOnly: z.boolean(),
-    recipient: string,
+    recipient: z.string(),
     referralFee: z.number(),
   });
 }
@@ -1617,9 +1617,9 @@ export function FeeCollectModuleSettingsSchema(): z.ZodObject<
   return z.object({
     __typename: z.literal("FeeCollectModuleSettings").optional(),
     amount: definedNonNullAnySchema,
-    contractAddress: string,
+    contractAddress: z.string(),
     followerOnly: z.boolean(),
-    recipient: string,
+    recipient: z.string(),
     referralFee: z.number(),
     type: definedNonNullAnySchema,
   });
@@ -1630,7 +1630,7 @@ export function FeeFollowModuleParamsSchema(): z.ZodObject<
 > {
   return z.object({
     amount: definedNonNullAnySchema,
-    recipient: string,
+    recipient: z.string(),
   });
 }
 
@@ -1648,8 +1648,8 @@ export function FeeFollowModuleSettingsSchema(): z.ZodObject<
   return z.object({
     __typename: z.literal("FeeFollowModuleSettings").optional(),
     amount: definedNonNullAnySchema,
-    contractAddress: string,
-    recipient: string,
+    contractAddress: z.string(),
+    recipient: z.string(),
     type: definedNonNullAnySchema,
   });
 }
@@ -1661,10 +1661,10 @@ export function FeedHighlightsRequestSchema(): z.ZodObject<
 > {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
     metadata: definedNonNullAnySchema.nullish(),
-    profileId: string,
-    sources: z.array(string).nullish(),
+    profileId: z.string(),
+    sources: z.array(z.string()).nullish(),
   });
 }
 
@@ -1684,17 +1684,17 @@ export function FeedRequestSchema(): z.ZodObject<Properties<FeedRequest>> {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
     feedEventItemTypes: z.array(definedNonNullAnySchema).nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
     metadata: definedNonNullAnySchema.nullish(),
-    profileId: string,
-    sources: z.array(string).nullish(),
+    profileId: z.string(),
+    sources: z.array(z.string()).nullish(),
   });
 }
 
 export function FollowSchema(): z.ZodObject<Properties<Follow>> {
   return z.object({
     followModule: definedNonNullAnySchema.nullish(),
-    profile: string,
+    profile: z.string(),
   });
 }
 
@@ -1702,7 +1702,7 @@ export function FollowConditionInputSchema(): z.ZodObject<
   Properties<FollowConditionInput>
 > {
   return z.object({
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -1711,7 +1711,7 @@ export function FollowConditionOutputSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("FollowConditionOutput").optional(),
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -1744,7 +1744,7 @@ export function FollowOnlyReferenceModuleSettingsSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("FollowOnlyReferenceModuleSettings").optional(),
-    contractAddress: string,
+    contractAddress: z.string(),
     type: definedNonNullAnySchema,
   });
 }
@@ -1785,7 +1785,7 @@ export function FollowerNftOwnedTokenIdsSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("FollowerNftOwnedTokenIds").optional(),
-    followerNftAddress: string,
+    followerNftAddress: z.string(),
     tokensIds: z.array(z.string()),
   });
 }
@@ -1794,8 +1794,8 @@ export function FollowerNftOwnedTokenIdsRequestSchema(): z.ZodObject<
   Properties<FollowerNftOwnedTokenIdsRequest>
 > {
   return z.object({
-    address: string,
-    profileId: string,
+    address: z.string(),
+    profileId: z.string(),
   });
 }
 
@@ -1804,8 +1804,8 @@ export function FollowersRequestSchema(): z.ZodObject<
 > {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
-    profileId: string,
+    limit: z.number().nullish(),
+    profileId: z.string(),
   });
 }
 
@@ -1821,9 +1821,9 @@ export function FollowingRequestSchema(): z.ZodObject<
   Properties<FollowingRequest>
 > {
   return z.object({
-    address: string,
+    address: z.string(),
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
   });
 }
 
@@ -1849,7 +1849,7 @@ export function FreeCollectModuleSettingsSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("FreeCollectModuleSettings").optional(),
-    contractAddress: string,
+    contractAddress: z.string(),
     followerOnly: z.boolean(),
     type: definedNonNullAnySchema,
   });
@@ -1859,7 +1859,7 @@ export function FreeCollectProxyActionSchema(): z.ZodObject<
   Properties<FreeCollectProxyAction>
 > {
   return z.object({
-    publicationId: string,
+    publicationId: z.string(),
   });
 }
 
@@ -1867,7 +1867,7 @@ export function FreeFollowProxyActionSchema(): z.ZodObject<
   Properties<FreeFollowProxyAction>
 > {
   return z.object({
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -1892,9 +1892,9 @@ export function GenerateModuleCurrencyApprovalSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("GenerateModuleCurrencyApproval").optional(),
-    data: ethers.Bytes,
-    from: string,
-    to: string,
+    data: definedNonNullAnySchema,
+    from: z.string(),
+    to: z.string(),
   });
 }
 
@@ -1903,12 +1903,12 @@ export function GenerateModuleCurrencyApprovalDataRequestSchema(): z.ZodObject<
 > {
   return z.object({
     collectModule: definedNonNullAnySchema.nullish(),
-    currency: string,
+    currency: z.string(),
     followModule: definedNonNullAnySchema.nullish(),
     referenceModule: definedNonNullAnySchema.nullish(),
-    unknownCollectModule: string.nullish(),
-    unknownFollowModule: string.nullish(),
-    unknownReferenceModule: string.nullish(),
+    unknownCollectModule: z.string().nullish(),
+    unknownFollowModule: z.string().nullish(),
+    unknownReferenceModule: z.string().nullish(),
     value: z.string(),
   });
 }
@@ -1917,9 +1917,9 @@ export function GetPublicationMetadataStatusRequestSchema(): z.ZodObject<
   Properties<GetPublicationMetadataStatusRequest>
 > {
   return z.object({
-    publicationId: string.nullish(),
-    txHash: string.nullish(),
-    txId: string.nullish(),
+    publicationId: z.string().nullish(),
+    txHash: z.string().nullish(),
+    txId: z.string().nullish(),
   });
 }
 
@@ -1943,9 +1943,9 @@ export function GlobalProtocolStatsRequestSchema(): z.ZodObject<
   Properties<GlobalProtocolStatsRequest>
 > {
   return z.object({
-    fromTimestamp: number.nullish(),
-    sources: z.array(string).nullish(),
-    toTimestamp: number.nullish(),
+    fromTimestamp: z.number().nullish(),
+    sources: z.array(z.string()).nullish(),
+    toTimestamp: z.number().nullish(),
   });
 }
 
@@ -1953,8 +1953,8 @@ export function HasTxHashBeenIndexedRequestSchema(): z.ZodObject<
   Properties<HasTxHashBeenIndexedRequest>
 > {
   return z.object({
-    txHash: string.nullish(),
-    txId: string.nullish(),
+    txHash: z.string().nullish(),
+    txId: z.string().nullish(),
   });
 }
 
@@ -1962,7 +1962,7 @@ export function HidePublicationRequestSchema(): z.ZodObject<
   Properties<HidePublicationRequest>
 > {
   return z.object({
-    publicationId: string,
+    publicationId: z.string(),
   });
 }
 
@@ -1981,9 +1981,9 @@ export function InternalPublicationsFilterRequestSchema(): z.ZodObject<
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
     fromDate: z.string(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
     secret: z.string(),
-    source: string,
+    source: z.string(),
     toDate: z.string(),
   });
 }
@@ -1995,7 +1995,7 @@ export function LimitedFeeCollectModuleParamsSchema(): z.ZodObject<
     amount: definedNonNullAnySchema,
     collectLimit: z.string(),
     followerOnly: z.boolean(),
-    recipient: string,
+    recipient: z.string(),
     referralFee: z.number(),
   });
 }
@@ -2007,9 +2007,9 @@ export function LimitedFeeCollectModuleSettingsSchema(): z.ZodObject<
     __typename: z.literal("LimitedFeeCollectModuleSettings").optional(),
     amount: definedNonNullAnySchema,
     collectLimit: z.string(),
-    contractAddress: string,
+    contractAddress: z.string(),
     followerOnly: z.boolean(),
-    recipient: string,
+    recipient: z.string(),
     referralFee: z.number(),
     type: definedNonNullAnySchema,
   });
@@ -2022,7 +2022,7 @@ export function LimitedTimedFeeCollectModuleParamsSchema(): z.ZodObject<
     amount: definedNonNullAnySchema,
     collectLimit: z.string(),
     followerOnly: z.boolean(),
-    recipient: string,
+    recipient: z.string(),
     referralFee: z.number(),
   });
 }
@@ -2034,10 +2034,10 @@ export function LimitedTimedFeeCollectModuleSettingsSchema(): z.ZodObject<
     __typename: z.literal("LimitedTimedFeeCollectModuleSettings").optional(),
     amount: definedNonNullAnySchema,
     collectLimit: z.string(),
-    contractAddress: string,
-    endTimestamp: Date,
+    contractAddress: z.string(),
+    endTimestamp: definedNonNullAnySchema,
     followerOnly: z.boolean(),
-    recipient: string,
+    recipient: z.string(),
     referralFee: z.number(),
     type: definedNonNullAnySchema,
   });
@@ -2046,14 +2046,14 @@ export function LimitedTimedFeeCollectModuleSettingsSchema(): z.ZodObject<
 export function LogSchema(): z.ZodObject<Properties<Log>> {
   return z.object({
     __typename: z.literal("Log").optional(),
-    address: string,
+    address: z.string(),
     blockHash: z.string(),
     blockNumber: z.number(),
     data: z.string(),
     logIndex: z.number(),
     removed: z.boolean(),
     topics: z.array(z.string()),
-    transactionHash: string,
+    transactionHash: z.string(),
     transactionIndex: z.number(),
   });
 }
@@ -2062,11 +2062,11 @@ export function MediaSchema(): z.ZodObject<Properties<Media>> {
   return z.object({
     __typename: z.literal("Media").optional(),
     altTag: z.string().nullish(),
-    cover: string.nullish(),
+    cover: z.string().nullish(),
     height: z.number().nullish(),
-    mimeType: string.nullish(),
+    mimeType: z.string().nullish(),
     size: z.number().nullish(),
-    url: string,
+    url: z.string(),
     width: z.number().nullish(),
   });
 }
@@ -2075,10 +2075,10 @@ export function MediaOutputSchema(): z.ZodObject<Properties<MediaOutput>> {
   return z.object({
     __typename: z.literal("MediaOutput").optional(),
     altTag: z.string().nullish(),
-    cover: string.nullish(),
-    item: string,
+    cover: z.string().nullish(),
+    item: z.string(),
     source: definedNonNullAnySchema.nullish(),
-    type: string.nullish(),
+    type: z.string().nullish(),
   });
 }
 
@@ -2117,15 +2117,15 @@ export function MetadataOutputSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("MetadataOutput").optional(),
-    animatedUrl: string.nullish(),
+    animatedUrl: z.string().nullish(),
     attributes: z.array(definedNonNullAnySchema),
-    content: string.nullish(),
+    content: z.string().nullish(),
     contentWarning: definedNonNullAnySchema.nullish(),
     cover: definedNonNullAnySchema.nullish(),
-    description: string.nullish(),
+    description: z.string().nullish(),
     encryptionParams: definedNonNullAnySchema.nullish(),
-    image: string.nullish(),
-    locale: string.nullish(),
+    image: z.string().nullish(),
+    locale: z.string().nullish(),
     mainContentFocus: definedNonNullAnySchema,
     media: z.array(definedNonNullAnySchema),
     name: z.string().nullish(),
@@ -2136,16 +2136,16 @@ export function MetadataOutputSchema(): z.ZodObject<
 export function MirrorSchema(): z.ZodObject<Properties<Mirror>> {
   return z.object({
     __typename: z.literal("Mirror").optional(),
-    appId: string.nullish(),
+    appId: z.string().nullish(),
     canComment: definedNonNullAnySchema,
     canDecrypt: definedNonNullAnySchema,
     canMirror: definedNonNullAnySchema,
     collectModule: definedNonNullAnySchema,
-    collectNftAddress: string.nullish(),
-    createdAt: Date,
+    collectNftAddress: z.string().nullish(),
+    createdAt: definedNonNullAnySchema,
     hasCollectedByMe: z.boolean(),
     hidden: z.boolean(),
-    id: string,
+    id: z.string(),
     isGated: z.boolean(),
     metadata: definedNonNullAnySchema,
     mirrorOf: definedNonNullAnySchema,
@@ -2161,7 +2161,7 @@ export function MirrorEventSchema(): z.ZodObject<Properties<MirrorEvent>> {
   return z.object({
     __typename: z.literal("MirrorEvent").optional(),
     profile: definedNonNullAnySchema,
-    timestamp: Date,
+    timestamp: definedNonNullAnySchema,
   });
 }
 
@@ -2179,7 +2179,7 @@ export function ModuleFeeAmountParamsSchema(): z.ZodObject<
   Properties<ModuleFeeAmountParams>
 > {
   return z.object({
-    currency: string,
+    currency: z.string(),
     value: z.string(),
   });
 }
@@ -2197,19 +2197,19 @@ export function MutualFollowersProfilesQueryRequestSchema(): z.ZodObject<
 > {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
-    viewingProfileId: string,
-    yourProfileId: string,
+    limit: z.number().nullish(),
+    viewingProfileId: z.string(),
+    yourProfileId: z.string(),
   });
 }
 
 export function NftSchema(): z.ZodObject<Properties<Nft>> {
   return z.object({
     __typename: z.literal("NFT").optional(),
-    chainId: number,
+    chainId: z.number(),
     collectionName: z.string(),
     contentURI: z.string(),
-    contractAddress: string,
+    contractAddress: z.string(),
     contractName: z.string(),
     description: z.string(),
     ercType: z.string(),
@@ -2232,18 +2232,18 @@ export function NftContentSchema(): z.ZodObject<Properties<NftContent>> {
 
 export function NftDataSchema(): z.ZodObject<Properties<NftData>> {
   return z.object({
-    id: string,
-    signature: string,
+    id: z.string(),
+    signature: z.string(),
   });
 }
 
 export function NfTsRequestSchema(): z.ZodObject<Properties<NfTsRequest>> {
   return z.object({
-    chainIds: z.array(number),
-    contractAddress: string.nullish(),
+    chainIds: z.array(z.number()),
+    contractAddress: z.string().nullish(),
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
-    ownerAddress: string,
+    limit: z.number().nullish(),
+    ownerAddress: z.string(),
   });
 }
 
@@ -2261,8 +2261,8 @@ export function NewCollectNotificationSchema(): z.ZodObject<
   return z.object({
     __typename: z.literal("NewCollectNotification").optional(),
     collectedPublication: definedNonNullAnySchema,
-    createdAt: Date,
-    notificationId: string,
+    createdAt: definedNonNullAnySchema,
+    notificationId: z.string(),
     wallet: definedNonNullAnySchema,
   });
 }
@@ -2273,8 +2273,8 @@ export function NewCommentNotificationSchema(): z.ZodObject<
   return z.object({
     __typename: z.literal("NewCommentNotification").optional(),
     comment: definedNonNullAnySchema,
-    createdAt: Date,
-    notificationId: string,
+    createdAt: definedNonNullAnySchema,
+    notificationId: z.string(),
     profile: definedNonNullAnySchema,
   });
 }
@@ -2284,9 +2284,9 @@ export function NewFollowerNotificationSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("NewFollowerNotification").optional(),
-    createdAt: Date,
+    createdAt: definedNonNullAnySchema,
     isFollowedByMe: z.boolean(),
-    notificationId: string,
+    notificationId: z.string(),
     wallet: definedNonNullAnySchema,
   });
 }
@@ -2296,9 +2296,9 @@ export function NewMentionNotificationSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("NewMentionNotification").optional(),
-    createdAt: Date,
+    createdAt: definedNonNullAnySchema,
     mentionPublication: definedNonNullAnySchema,
-    notificationId: string,
+    notificationId: z.string(),
   });
 }
 
@@ -2307,8 +2307,8 @@ export function NewMirrorNotificationSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("NewMirrorNotification").optional(),
-    createdAt: Date,
-    notificationId: string,
+    createdAt: definedNonNullAnySchema,
+    notificationId: z.string(),
     profile: definedNonNullAnySchema,
     publication: definedNonNullAnySchema,
   });
@@ -2319,8 +2319,8 @@ export function NewReactionNotificationSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("NewReactionNotification").optional(),
-    createdAt: Date,
-    notificationId: string,
+    createdAt: definedNonNullAnySchema,
+    notificationId: z.string(),
     profile: definedNonNullAnySchema,
     publication: definedNonNullAnySchema,
     reaction: definedNonNullAnySchema,
@@ -2331,9 +2331,9 @@ export function NftImageSchema(): z.ZodObject<Properties<NftImage>> {
   return z.object({
     __typename: z.literal("NftImage").optional(),
     chainId: z.number(),
-    contractAddress: string,
+    contractAddress: z.string(),
     tokenId: z.string(),
-    uri: string,
+    uri: z.string(),
     verified: z.boolean(),
   });
 }
@@ -2342,8 +2342,8 @@ export function NftOwnershipChallengeSchema(): z.ZodObject<
   Properties<NftOwnershipChallenge>
 > {
   return z.object({
-    chainId: number,
-    contractAddress: string,
+    chainId: z.number(),
+    contractAddress: z.string(),
     tokenId: z.string(),
   });
 }
@@ -2352,7 +2352,7 @@ export function NftOwnershipChallengeRequestSchema(): z.ZodObject<
   Properties<NftOwnershipChallengeRequest>
 > {
   return z.object({
-    ethereumAddress: string,
+    ethereumAddress: z.string(),
     nfts: z.array(definedNonNullAnySchema),
   });
 }
@@ -2362,9 +2362,9 @@ export function NftOwnershipChallengeResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("NftOwnershipChallengeResult").optional(),
-    id: string,
+    id: z.string(),
     text: z.string(),
-    timeout: number,
+    timeout: z.number(),
   });
 }
 
@@ -2372,8 +2372,8 @@ export function NftOwnershipInputSchema(): z.ZodObject<
   Properties<NftOwnershipInput>
 > {
   return z.object({
-    chainID: number,
-    contractAddress: string,
+    chainID: z.number(),
+    contractAddress: z.string(),
     contractType: definedNonNullAnySchema,
     tokenIds: definedNonNullAnySchema.nullish(),
   });
@@ -2384,8 +2384,8 @@ export function NftOwnershipOutputSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("NftOwnershipOutput").optional(),
-    chainID: number,
-    contractAddress: string,
+    chainID: z.number(),
+    contractAddress: z.string(),
     contractType: definedNonNullAnySchema,
     tokenIds: definedNonNullAnySchema.nullish(),
   });
@@ -2397,11 +2397,11 @@ export function NotificationRequestSchema(): z.ZodObject<
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
     customFilters: z.array(definedNonNullAnySchema).nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
     metadata: definedNonNullAnySchema.nullish(),
     notificationTypes: z.array(definedNonNullAnySchema).nullish(),
-    profileId: string,
-    sources: z.array(string).nullish(),
+    profileId: z.string(),
+    sources: z.array(z.string()).nullish(),
   });
 }
 
@@ -2439,7 +2439,7 @@ export function OrConditionOutputSchema(): z.ZodObject<
 export function OwnerSchema(): z.ZodObject<Properties<Owner>> {
   return z.object({
     __typename: z.literal("Owner").optional(),
-    address: string,
+    address: z.string(),
     amount: z.number(),
   });
 }
@@ -2572,7 +2572,7 @@ export function PendingApprovalFollowsRequestSchema(): z.ZodObject<
 > {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
   });
 }
 
@@ -2589,20 +2589,20 @@ export function PendingApproveFollowsResultSchema(): z.ZodObject<
 export function PostSchema(): z.ZodObject<Properties<Post>> {
   return z.object({
     __typename: z.literal("Post").optional(),
-    appId: string.nullish(),
+    appId: z.string().nullish(),
     canComment: definedNonNullAnySchema,
     canDecrypt: definedNonNullAnySchema,
     canMirror: definedNonNullAnySchema,
     collectModule: definedNonNullAnySchema,
-    collectNftAddress: string.nullish(),
+    collectNftAddress: z.string().nullish(),
     collectedBy: definedNonNullAnySchema.nullish(),
-    createdAt: Date,
+    createdAt: definedNonNullAnySchema,
     hasCollectedByMe: z.boolean(),
     hidden: z.boolean(),
-    id: string,
+    id: z.string(),
     isGated: z.boolean(),
     metadata: definedNonNullAnySchema,
-    mirrors: z.array(string),
+    mirrors: z.array(z.string()),
     onChainContentURI: z.string(),
     profile: definedNonNullAnySchema,
     reaction: definedNonNullAnySchema.nullish(),
@@ -2619,17 +2619,17 @@ export function ProfileSchema(): z.ZodObject<Properties<Profile>> {
     coverPicture: definedNonNullAnySchema.nullish(),
     dispatcher: definedNonNullAnySchema.nullish(),
     followModule: definedNonNullAnySchema.nullish(),
-    followNftAddress: string.nullish(),
-    handle: string,
-    id: string,
+    followNftAddress: z.string().nullish(),
+    handle: z.string(),
+    id: z.string(),
     interests: z.array(definedNonNullAnySchema).nullish(),
     isDefault: z.boolean(),
     isFollowedByMe: z.boolean(),
     isFollowing: z.boolean(),
-    metadata: string.nullish(),
+    metadata: z.string().nullish(),
     name: z.string().nullish(),
     onChainIdentity: definedNonNullAnySchema,
-    ownedBy: string,
+    ownedBy: z.string(),
     picture: definedNonNullAnySchema.nullish(),
     stats: definedNonNullAnySchema,
   });
@@ -2639,8 +2639,8 @@ export function ProfileFollowModuleBeenRedeemedRequestSchema(): z.ZodObject<
   Properties<ProfileFollowModuleBeenRedeemedRequest>
 > {
   return z.object({
-    followProfileId: string,
-    redeemingProfileId: string,
+    followProfileId: z.string(),
+    redeemingProfileId: z.string(),
   });
 }
 
@@ -2648,7 +2648,7 @@ export function ProfileFollowModuleRedeemParamsSchema(): z.ZodObject<
   Properties<ProfileFollowModuleRedeemParams>
 > {
   return z.object({
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -2657,7 +2657,7 @@ export function ProfileFollowModuleSettingsSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("ProfileFollowModuleSettings").optional(),
-    contractAddress: string,
+    contractAddress: z.string(),
     type: definedNonNullAnySchema,
   });
 }
@@ -2666,7 +2666,7 @@ export function ProfileFollowRevenueQueryRequestSchema(): z.ZodObject<
   Properties<ProfileFollowRevenueQueryRequest>
 > {
   return z.object({
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -2674,7 +2674,7 @@ export function ProfileOnChainIdentityRequestSchema(): z.ZodObject<
   Properties<ProfileOnChainIdentityRequest>
 > {
   return z.object({
-    profileIds: z.array(string),
+    profileIds: z.array(z.string()),
   });
 }
 
@@ -2682,7 +2682,7 @@ export function ProfileOwnershipInputSchema(): z.ZodObject<
   Properties<ProfileOwnershipInput>
 > {
   return z.object({
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -2691,7 +2691,7 @@ export function ProfileOwnershipOutputSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("ProfileOwnershipOutput").optional(),
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -2700,10 +2700,10 @@ export function ProfilePublicationRevenueQueryRequestSchema(): z.ZodObject<
 > {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
     metadata: definedNonNullAnySchema.nullish(),
-    profileId: string,
-    sources: z.array(string).nullish(),
+    profileId: z.string(),
+    sources: z.array(z.string()).nullish(),
     types: z.array(definedNonNullAnySchema).nullish(),
   });
 }
@@ -2723,10 +2723,10 @@ export function ProfilePublicationsForSaleRequestSchema(): z.ZodObject<
 > {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
     metadata: definedNonNullAnySchema.nullish(),
-    profileId: string,
-    sources: z.array(string).nullish(),
+    profileId: z.string(),
+    sources: z.array(z.string()).nullish(),
   });
 }
 
@@ -2735,11 +2735,11 @@ export function ProfileQueryRequestSchema(): z.ZodObject<
 > {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
-    handles: z.array(string).nullish(),
-    limit: number.nullish(),
-    ownedBy: z.array(string).nullish(),
-    profileIds: z.array(string).nullish(),
-    whoMirroredPublicationId: string.nullish(),
+    handles: z.array(z.string()).nullish(),
+    limit: z.number().nullish(),
+    ownedBy: z.array(z.string()).nullish(),
+    profileIds: z.array(z.string()).nullish(),
+    whoMirroredPublicationId: z.string().nullish(),
   });
 }
 
@@ -2760,7 +2760,7 @@ export function ProfileStatsSchema(): z.ZodObject<Properties<ProfileStats>> {
   return z.object({
     __typename: z.literal("ProfileStats").optional(),
     commentsTotal: z.number(),
-    id: string,
+    id: z.string(),
     mirrorsTotal: z.number(),
     postsTotal: z.number(),
     publicationsTotal: z.number(),
@@ -2788,7 +2788,7 @@ export function ProxyActionErrorSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("ProxyActionError").optional(),
-    lastKnownTxId: string.nullish(),
+    lastKnownTxId: z.string().nullish(),
     reason: z.string(),
   });
 }
@@ -2798,7 +2798,7 @@ export function ProxyActionQueuedSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("ProxyActionQueued").optional(),
-    queuedAt: Date,
+    queuedAt: definedNonNullAnySchema,
   });
 }
 
@@ -2817,8 +2817,8 @@ export function ProxyActionStatusResultSchema(): z.ZodObject<
   return z.object({
     __typename: z.literal("ProxyActionStatusResult").optional(),
     status: definedNonNullAnySchema,
-    txHash: string,
-    txId: string,
+    txHash: z.string(),
+    txId: z.string(),
   });
 }
 
@@ -2831,9 +2831,9 @@ export function PublicMediaRequestSchema(): z.ZodObject<
 > {
   return z.object({
     altTag: z.string().nullish(),
-    cover: string.nullish(),
+    cover: z.string().nullish(),
     itemCid: definedNonNullAnySchema,
-    type: string.nullish(),
+    type: z.string().nullish(),
   });
 }
 
@@ -2874,7 +2874,7 @@ export function PublicationMetadataFiltersSchema(): z.ZodObject<
 > {
   return z.object({
     contentWarning: definedNonNullAnySchema.nullish(),
-    locale: string.nullish(),
+    locale: z.string().nullish(),
     mainContentFocus: z.array(definedNonNullAnySchema).nullish(),
     tags: definedNonNullAnySchema.nullish(),
   });
@@ -2885,10 +2885,10 @@ export function PublicationMetadataMediaInputSchema(): z.ZodObject<
 > {
   return z.object({
     altTag: z.string().nullish(),
-    cover: string.nullish(),
-    item: string,
+    cover: z.string().nullish(),
+    item: z.string(),
     source: definedNonNullAnySchema.nullish(),
-    type: string.nullish(),
+    type: z.string().nullish(),
   });
 }
 
@@ -2919,14 +2919,14 @@ export function PublicationMetadataV1InputSchema(): z.ZodObject<
   Properties<PublicationMetadataV1Input>
 > {
   return z.object({
-    animation_url: string.nullish(),
-    appId: string.nullish(),
+    animation_url: z.string().nullish(),
+    appId: z.string().nullish(),
     attributes: z.array(z.lazy(() => definedNonNullAnySchema)),
-    content: string.nullish(),
-    description: string.nullish(),
-    external_url: string.nullish(),
-    image: string.nullish(),
-    imageMimeType: string.nullish(),
+    content: z.string().nullish(),
+    description: z.string().nullish(),
+    external_url: z.string().nullish(),
+    image: z.string().nullish(),
+    imageMimeType: z.string().nullish(),
     media: z.array(z.lazy(() => definedNonNullAnySchema)).nullish(),
     metadata_id: z.string(),
     name: z.string(),
@@ -2939,16 +2939,16 @@ export function PublicationMetadataV2InputSchema(): z.ZodObject<
   Properties<PublicationMetadataV2Input>
 > {
   return z.object({
-    animation_url: string.nullish(),
-    appId: string.nullish(),
+    animation_url: z.string().nullish(),
+    appId: z.string().nullish(),
     attributes: z.array(z.lazy(() => definedNonNullAnySchema)),
-    content: string.nullish(),
+    content: z.string().nullish(),
     contentWarning: definedNonNullAnySchema.nullish(),
-    description: string.nullish(),
-    external_url: string.nullish(),
-    image: string.nullish(),
-    imageMimeType: string.nullish(),
-    locale: string,
+    description: z.string().nullish(),
+    external_url: z.string().nullish(),
+    image: z.string().nullish(),
+    imageMimeType: z.string().nullish(),
+    locale: z.string(),
     mainContentFocus: definedNonNullAnySchema,
     media: z.array(z.lazy(() => definedNonNullAnySchema)).nullish(),
     metadata_id: z.string(),
@@ -2963,8 +2963,8 @@ export function PublicationQueryRequestSchema(): z.ZodObject<
   Properties<PublicationQueryRequest>
 > {
   return z.object({
-    publicationId: string.nullish(),
-    txHash: string.nullish(),
+    publicationId: z.string().nullish(),
+    txHash: z.string().nullish(),
   });
 }
 
@@ -3002,7 +3002,7 @@ export function PublicationRevenueQueryRequestSchema(): z.ZodObject<
   Properties<PublicationRevenueQueryRequest>
 > {
   return z.object({
-    publicationId: string,
+    publicationId: z.string(),
   });
 }
 
@@ -3035,7 +3035,7 @@ export function PublicationStatsSchema(): z.ZodObject<
   return z.object({
     __typename: z.literal("PublicationStats").optional(),
     commentsTotal: z.number(),
-    id: string,
+    id: z.string(),
     totalAmountOfCollects: z.number(),
     totalAmountOfComments: z.number(),
     totalAmountOfMirrors: z.number(),
@@ -3060,17 +3060,17 @@ export function PublicationsQueryRequestSchema(): z.ZodObject<
   Properties<PublicationsQueryRequest>
 > {
   return z.object({
-    collectedBy: string.nullish(),
-    commentsOf: string.nullish(),
+    collectedBy: z.string().nullish(),
+    commentsOf: z.string().nullish(),
     cursor: definedNonNullAnySchema.nullish(),
     customFilters: z.array(definedNonNullAnySchema).nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
     metadata: definedNonNullAnySchema.nullish(),
-    profileId: string.nullish(),
-    profileIds: z.array(string).nullish(),
-    publicationIds: z.array(string).nullish(),
+    profileId: z.string().nullish(),
+    profileIds: z.array(z.string()).nullish(),
+    publicationIds: z.array(z.string()).nullish(),
     publicationTypes: z.array(definedNonNullAnySchema).nullish(),
-    sources: z.array(string).nullish(),
+    sources: z.array(z.string()).nullish(),
   });
 }
 
@@ -3079,7 +3079,7 @@ export function ReactionEventSchema(): z.ZodObject<Properties<ReactionEvent>> {
     __typename: z.literal("ReactionEvent").optional(),
     profile: definedNonNullAnySchema,
     reaction: definedNonNullAnySchema,
-    timestamp: Date,
+    timestamp: definedNonNullAnySchema,
   });
 }
 
@@ -3087,7 +3087,7 @@ export function ReactionFieldResolverRequestSchema(): z.ZodObject<
   Properties<ReactionFieldResolverRequest>
 > {
   return z.object({
-    profileId: string.nullish(),
+    profileId: z.string().nullish(),
   });
 }
 
@@ -3095,8 +3095,8 @@ export function ReactionRequestSchema(): z.ZodObject<
   Properties<ReactionRequest>
 > {
   return z.object({
-    profileId: string,
-    publicationId: string,
+    profileId: z.string(),
+    publicationId: z.string(),
     reaction: definedNonNullAnySchema,
   });
 }
@@ -3128,13 +3128,13 @@ export function RefreshRequestSchema(): z.ZodObject<
   Properties<RefreshRequest>
 > {
   return z.object({
-    refreshToken: string,
+    refreshToken: z.string(),
   });
 }
 
 export function RelRequestSchema(): z.ZodObject<Properties<RelRequest>> {
   return z.object({
-    ethereumAddress: string,
+    ethereumAddress: z.string(),
     secret: z.string(),
   });
 }
@@ -3151,8 +3151,8 @@ export const RelayErrorReasonsSchema = z.nativeEnum(RelayErrorReasons);
 export function RelayerResultSchema(): z.ZodObject<Properties<RelayerResult>> {
   return z.object({
     __typename: z.literal("RelayerResult").optional(),
-    txHash: string,
-    txId: string,
+    txHash: z.string(),
+    txId: z.string(),
   });
 }
 
@@ -3161,7 +3161,7 @@ export function RemoveProfileInterestsRequestSchema(): z.ZodObject<
 > {
   return z.object({
     interests: z.array(definedNonNullAnySchema),
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -3170,7 +3170,7 @@ export function ReportPublicationRequestSchema(): z.ZodObject<
 > {
   return z.object({
     additionalComments: z.string().nullish(),
-    publicationId: string,
+    publicationId: z.string(),
     reason: z.lazy(() => definedNonNullAnySchema),
   });
 }
@@ -3191,8 +3191,8 @@ export function ReservedClaimableHandleSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("ReservedClaimableHandle").optional(),
-    expiry: Date,
-    handle: string,
+    expiry: definedNonNullAnySchema,
+    handle: z.string(),
     id: definedNonNullAnySchema,
     source: z.string(),
   });
@@ -3212,7 +3212,7 @@ export function RevertCollectModuleSettingsSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("RevertCollectModuleSettings").optional(),
-    contractAddress: string,
+    contractAddress: z.string(),
     type: definedNonNullAnySchema,
   });
 }
@@ -3222,7 +3222,7 @@ export function RevertFollowModuleSettingsSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("RevertFollowModuleSettings").optional(),
-    contractAddress: string,
+    contractAddress: z.string(),
     type: definedNonNullAnySchema,
   });
 }
@@ -3235,9 +3235,9 @@ export function SearchQueryRequestSchema(): z.ZodObject<
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
     customFilters: z.array(definedNonNullAnySchema).nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
     query: definedNonNullAnySchema,
-    sources: z.array(string).nullish(),
+    sources: z.array(z.string()).nullish(),
     type: definedNonNullAnySchema,
   });
 }
@@ -3258,8 +3258,8 @@ export function SetDefaultProfileBroadcastItemResultSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("SetDefaultProfileBroadcastItemResult").optional(),
-    expiresAt: Date,
-    id: string,
+    expiresAt: definedNonNullAnySchema,
+    id: z.string(),
     typedData: definedNonNullAnySchema,
   });
 }
@@ -3289,10 +3289,10 @@ export function SetDefaultProfileEip712TypedDataValueSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("SetDefaultProfileEIP712TypedDataValue").optional(),
-    deadline: number,
-    nonce: number,
-    profileId: string,
-    wallet: string,
+    deadline: z.number(),
+    nonce: z.number(),
+    profileId: z.string(),
+    wallet: z.string(),
   });
 }
 
@@ -3300,9 +3300,9 @@ export function SetDispatcherRequestSchema(): z.ZodObject<
   Properties<SetDispatcherRequest>
 > {
   return z.object({
-    dispatcher: string.nullish(),
+    dispatcher: z.string().nullish(),
     enable: z.boolean().nullish(),
-    profileId: string,
+    profileId: z.string(),
   });
 }
 
@@ -3310,8 +3310,8 @@ export function SignedAuthChallengeSchema(): z.ZodObject<
   Properties<SignedAuthChallenge>
 > {
   return z.object({
-    address: string,
-    signature: string,
+    address: z.string(),
+    signature: z.string(),
   });
 }
 
@@ -3319,8 +3319,8 @@ export function SingleProfileQueryRequestSchema(): z.ZodObject<
   Properties<SingleProfileQueryRequest>
 > {
   return z.object({
-    handle: string.nullish(),
-    profileId: string.nullish(),
+    handle: z.string().nullish(),
+    profileId: z.string().nullish(),
   });
 }
 
@@ -3364,7 +3364,7 @@ export function SybilDotOrgTwitterIdentitySchema(): z.ZodObject<
 export function TagResultSchema(): z.ZodObject<Properties<TagResult>> {
   return z.object({
     __typename: z.literal("TagResult").optional(),
-    tag: string,
+    tag: z.string(),
     total: z.number(),
   });
 }
@@ -3377,7 +3377,7 @@ export function TimedFeeCollectModuleParamsSchema(): z.ZodObject<
   return z.object({
     amount: definedNonNullAnySchema,
     followerOnly: z.boolean(),
-    recipient: string,
+    recipient: z.string(),
     referralFee: z.number(),
   });
 }
@@ -3388,10 +3388,10 @@ export function TimedFeeCollectModuleSettingsSchema(): z.ZodObject<
   return z.object({
     __typename: z.literal("TimedFeeCollectModuleSettings").optional(),
     amount: definedNonNullAnySchema,
-    contractAddress: string,
-    endTimestamp: Date,
+    contractAddress: z.string(),
+    endTimestamp: definedNonNullAnySchema,
     followerOnly: z.boolean(),
-    recipient: string,
+    recipient: z.string(),
     referralFee: z.number(),
     type: definedNonNullAnySchema,
   });
@@ -3402,10 +3402,10 @@ export function TimelineRequestSchema(): z.ZodObject<
 > {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
+    limit: z.number().nullish(),
     metadata: definedNonNullAnySchema.nullish(),
-    profileId: string,
-    sources: z.array(string).nullish(),
+    profileId: z.string(),
+    sources: z.array(z.string()).nullish(),
     timelineTypes: z.array(definedNonNullAnySchema).nullish(),
   });
 }
@@ -3433,7 +3433,7 @@ export function TransactionIndexedResultSchema(): z.ZodObject<
     __typename: z.literal("TransactionIndexedResult").optional(),
     indexed: z.boolean(),
     metadataStatus: definedNonNullAnySchema.nullish(),
-    txHash: string,
+    txHash: z.string(),
     txReceipt: definedNonNullAnySchema.nullish(),
   });
 }
@@ -3447,17 +3447,17 @@ export function TransactionReceiptSchema(): z.ZodObject<
     blockNumber: z.number(),
     byzantium: z.boolean(),
     confirmations: z.number(),
-    contractAddress: string.nullish(),
+    contractAddress: z.string().nullish(),
     cumulativeGasUsed: z.string(),
     effectiveGasPrice: z.string(),
-    from: string,
+    from: z.string(),
     gasUsed: z.string(),
     logs: z.array(definedNonNullAnySchema),
     logsBloom: z.string(),
     root: z.string().nullish(),
     status: z.number().nullish(),
-    to: string.nullish(),
-    transactionHash: string,
+    to: z.string().nullish(),
+    transactionHash: z.string(),
     transactionIndex: z.number(),
     type: z.number(),
   });
@@ -3467,7 +3467,7 @@ export function TypedDataOptionsSchema(): z.ZodObject<
   Properties<TypedDataOptions>
 > {
   return z.object({
-    overrideSigNonce: number,
+    overrideSigNonce: z.number(),
   });
 }
 
@@ -3475,7 +3475,7 @@ export function UnfollowRequestSchema(): z.ZodObject<
   Properties<UnfollowRequest>
 > {
   return z.object({
-    profile: string,
+    profile: z.string(),
   });
 }
 
@@ -3483,8 +3483,8 @@ export function UnknownCollectModuleParamsSchema(): z.ZodObject<
   Properties<UnknownCollectModuleParams>
 > {
   return z.object({
-    contractAddress: string,
-    data: ethers.Bytes,
+    contractAddress: z.string(),
+    data: definedNonNullAnySchema,
   });
 }
 
@@ -3493,8 +3493,8 @@ export function UnknownCollectModuleSettingsSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("UnknownCollectModuleSettings").optional(),
-    collectModuleReturnData: ethers.Bytes,
-    contractAddress: string,
+    collectModuleReturnData: definedNonNullAnySchema,
+    contractAddress: z.string(),
     type: definedNonNullAnySchema,
   });
 }
@@ -3503,8 +3503,8 @@ export function UnknownFollowModuleParamsSchema(): z.ZodObject<
   Properties<UnknownFollowModuleParams>
 > {
   return z.object({
-    contractAddress: string,
-    data: ethers.Bytes,
+    contractAddress: z.string(),
+    data: definedNonNullAnySchema,
   });
 }
 
@@ -3512,7 +3512,7 @@ export function UnknownFollowModuleRedeemParamsSchema(): z.ZodObject<
   Properties<UnknownFollowModuleRedeemParams>
 > {
   return z.object({
-    data: ethers.Bytes,
+    data: definedNonNullAnySchema,
   });
 }
 
@@ -3521,8 +3521,8 @@ export function UnknownFollowModuleSettingsSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("UnknownFollowModuleSettings").optional(),
-    contractAddress: string,
-    followModuleReturnData: ethers.Bytes,
+    contractAddress: z.string(),
+    followModuleReturnData: definedNonNullAnySchema,
     type: definedNonNullAnySchema,
   });
 }
@@ -3531,8 +3531,8 @@ export function UnknownReferenceModuleParamsSchema(): z.ZodObject<
   Properties<UnknownReferenceModuleParams>
 > {
   return z.object({
-    contractAddress: string,
-    data: ethers.Bytes,
+    contractAddress: z.string(),
+    data: definedNonNullAnySchema,
   });
 }
 
@@ -3541,8 +3541,8 @@ export function UnknownReferenceModuleSettingsSchema(): z.ZodObject<
 > {
   return z.object({
     __typename: z.literal("UnknownReferenceModuleSettings").optional(),
-    contractAddress: string,
-    referenceModuleReturnData: ethers.Bytes,
+    contractAddress: z.string(),
+    referenceModuleReturnData: definedNonNullAnySchema,
     type: definedNonNullAnySchema,
   });
 }
@@ -3552,16 +3552,16 @@ export function UpdateProfileImageRequestSchema(): z.ZodObject<
 > {
   return z.object({
     nftData: definedNonNullAnySchema.nullish(),
-    profileId: string,
-    url: string.nullish(),
+    profileId: z.string(),
+    url: z.string().nullish(),
   });
 }
 
 export function UserSigNoncesSchema(): z.ZodObject<Properties<UserSigNonces>> {
   return z.object({
     __typename: z.literal("UserSigNonces").optional(),
-    lensHubOnChainSigNonce: number,
-    peripheryOnChainSigNonce: number,
+    lensHubOnChainSigNonce: z.number(),
+    peripheryOnChainSigNonce: z.number(),
   });
 }
 
@@ -3576,14 +3576,14 @@ export function ValidatePublicationMetadataRequestSchema(): z.ZodObject<
 
 export function VerifyRequestSchema(): z.ZodObject<Properties<VerifyRequest>> {
   return z.object({
-    accessToken: string,
+    accessToken: z.string(),
   });
 }
 
 export function WalletSchema(): z.ZodObject<Properties<Wallet>> {
   return z.object({
     __typename: z.literal("Wallet").optional(),
-    address: string,
+    address: z.string(),
     defaultProfile: definedNonNullAnySchema.nullish(),
   });
 }
@@ -3593,8 +3593,8 @@ export function WhoCollectedPublicationRequestSchema(): z.ZodObject<
 > {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
-    publicationId: string,
+    limit: z.number().nullish(),
+    publicationId: z.string(),
   });
 }
 
@@ -3603,8 +3603,8 @@ export function WhoReactedPublicationRequestSchema(): z.ZodObject<
 > {
   return z.object({
     cursor: definedNonNullAnySchema.nullish(),
-    limit: number.nullish(),
-    publicationId: string,
+    limit: z.number().nullish(),
+    publicationId: z.string(),
   });
 }
 
@@ -3615,8 +3615,8 @@ export function WhoReactedResultSchema(): z.ZodObject<
     __typename: z.literal("WhoReactedResult").optional(),
     profile: definedNonNullAnySchema,
     reaction: definedNonNullAnySchema,
-    reactionAt: Date,
-    reactionId: string,
+    reactionAt: definedNonNullAnySchema,
+    reactionId: z.string(),
   });
 }
 

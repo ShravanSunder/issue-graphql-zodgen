@@ -46,6 +46,7 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
-    "graphql": "^16.6.0"
+    "graphql": "^16.6.0",
+    "zod": "^3.19.1"
   }
 }

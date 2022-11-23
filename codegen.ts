@@ -1,4 +1,5 @@
 import { CodegenConfig } from '@graphql-codegen/cli';
+import z from 'zod'
 
 const scalarDefinition = {
   BlockchainData: 'ethers.Bytes',
@@ -39,7 +40,51 @@ const scalarDefinition = {
   UnixTimestamp: 'number',
   Url: 'string',
   Void: 'never',
-};
+} as const;
+
+const bytesSchema = z.array(z.any());
+const zodScalarDefinition = {
+  blockchainData: z.array(z.any()),
+  broadcastId: z.string(),
+  chainId: z.number(),
+  collectModuleData: bytesSchema,
+  contractAddress: z.string(),
+   createHandle: z.any(),
+   cursor: z.any(),
+  dateTime: z.date(),
+  ens: z.string(),
+  //EthereumAddress: z.string(),
+  ethereumAddress: z.string(),
+  followModuleData: bytesSchema,
+  handle: z.string(),
+  handleClaimIdScalar: z.any(),
+  internalPublicationId: z.string(),
+  jwt: z.string(),
+  limitScalar: z.number(),
+  locale: z.string(),
+  markdown: z.string(),
+  mimeType: z.string(),
+  nftOwnershipId: z.string(),
+  nonce: z.number(),
+  notificationId: z.string(),
+  profileId: z.string(),
+  proxyActionId: z.string(),
+  publicationId: z.string(),
+  publicationTag: z.string(),
+  publicationUrl: z.string(),
+  reactionId: z.string(),
+  referenceModuleData: bytesSchema,
+  search:  z.string(),
+  signature: z.string(),
+  sources: z.string(),
+  timestampScalar: z.number(),
+  txHash: z.string(),
+  txId: z.string(),
+  unixTimestamp: z.number(),
+  tagcriteria: 'TagSortCriteriaSchema',
+  url: z.string(),
+  void: z.never(),
+} as const;
 
 const pluginConfig = {
   enumsAsConst: true,
@@ -52,7 +97,7 @@ const pluginConfig = {
   scalars: scalarDefinition,
   enumAsTypes: true,
   withObjectType: true,
-  scalarSchemas: scalarDefinition,
+  scalarSchemas: zodScalarDefinition,
 };
 
 const importPlugins = [
